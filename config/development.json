@@ -1,0 +1,15 @@
+{
+	"port": 8080,
+	"bodyLimit": "100kb",
+  "corsHeaders": ["Link"],
+  "NODE_ENV": "development",
+  "mysql": {
+    "username": "root",
+    "password": "Adhan_r1",
+    "database": "member_order_in",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "dialect": "mysql",
+    "socketPath": ""
+  }
+}
