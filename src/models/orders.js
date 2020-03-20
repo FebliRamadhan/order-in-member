@@ -4,11 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     order_name: DataTypes.STRING,
     quantity: DataTypes.NUMBER,
     status: DataTypes.ENUM('waiting', 'accepted', 'rejected'),
-    user_id: DataTypes.NUMBER
+    user_id: DataTypes.STRING
   }, {});
 
   orders.associate = function(models) {
-    orders.belongsTo(models.user, {
+    this.belongsTo(models.user, {
       as: 'user',
       foreignKey: 'user_id',
     });

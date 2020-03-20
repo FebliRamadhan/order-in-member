@@ -9,7 +9,7 @@ export default ({ config, db }) => {
 	api.use('/users', require('./users')({ config, db }));
 	api.use('/roles', require('./roles')({ config, db }));
 	api.use('/orders', require('./orders')({ config, db }));
-	// api.use('./food', require('./foocleardservers')({ config, db }));
+	api.use('/food-server', require('./foodservers')({ config, db }));
 
 	// perhaps expose some API metadata at the root
 	api.get('/', (req, res) => {
