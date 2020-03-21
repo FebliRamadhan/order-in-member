@@ -9,7 +9,6 @@ module.exports = ({ config, db }) => {
     const schema = Joi.object().keys({
 
       limit: Joi.number().integer().default(5),
-      page: Joi.number().integer(),
       orderBy: Joi.string().valid('ASC', 'DESC'),
       status: Joi.string().valid('waiting', 'rejected', 'accepted')
 

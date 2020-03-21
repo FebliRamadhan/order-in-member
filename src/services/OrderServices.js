@@ -87,12 +87,10 @@ class OrderServices {
     }
   }
 
-  async listOrders({ status, limit, page, orderBy }) {
+  async listOrders({ status, limit, orderBy='DESC' }) {
     try {
 
       let orders = [];
-      let offset = (page * limit) - limit;
-      let hasNext  = true;
 
       const options = {
         attributes: ['user_id'],
@@ -120,13 +118,18 @@ class OrderServices {
           model: this.db.user,
           as: 'user'
         }],
-        
-      }      
+        order: [[ 'createdAt', orderBy ]],
+        limit
+      }
       
       let orderResult = await this.db.orders.findAll(query);
-      
+      let totalRecord = await this.db.orders.count(query);
+
       if (orderResult.length !== 0) {
-        orders.push(orderResult);
+        orders.push({
+          totalRecord,
+          orderResult
+        });
       }
 
     }));

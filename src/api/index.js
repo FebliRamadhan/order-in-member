@@ -4,8 +4,6 @@ export default ({ config, db }) => {
 
 	let api = Router();
 
-	// mount the facets resource
-
 	api.use('/users', require('./users')({ config, db }));
 	api.use('/roles', require('./roles')({ config, db }));
 	api.use('/orders', require('./orders')({ config, db }));

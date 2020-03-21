@@ -38,7 +38,6 @@ class UserServices {
       let payload = {
         sub: users.id
       }
-      console.log(payload);
       
       const token = jwt.sign(payload, fs.readFileSync('private'), { algorithm: 'RS256' });
 
@@ -77,10 +76,6 @@ class UserServices {
 
       if (!user.password === md5(password)) {
         throw { statusCode: 400, name: 'WrongPassword', message: 'Wrong Password'}
-      }
-
-      let payload = {
-        sub: user.id
       }
 
       let token = await this.db.accessTokens.findOne({ where: { user_id: user.id}});

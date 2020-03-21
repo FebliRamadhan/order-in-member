@@ -7,4 +7,3 @@ License
 -------
 
 MIT
-# order-in-member
