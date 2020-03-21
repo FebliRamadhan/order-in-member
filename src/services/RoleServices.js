@@ -17,6 +17,7 @@ class RoleServices {
       await this.db.roles.create(dataOpt);
 
       return {
+        statusCode: 200,
         name: 'SuccessCreate',
         message: 'Data successfully insert to database'
       }
@@ -27,13 +28,33 @@ class RoleServices {
 
   }
 
-  async lists() {
+  async lists({ limit, page=1, orderBy="DESC"}) {
 
     try {
       
-      const lists = await this.db.roles.findAll();
+      let offset = (page * limit) - limit;
+      let hasNext = true;
 
-      return lists;
+      const query = {
+        limit,
+        offset,
+        order: [['createdAt', orderBy]]
+      }
+
+      const lists = await this.db.roles.findAll(query);
+      const totalRecord = await this.db.roles.count();
+      
+      let totalPage = Math.ceil(totalRecord / limit);
+
+      if (page >= totalPage) hasNext = false;
+      console.log(totalPage);
+      
+      return {
+        page: totalPage,
+        hasNext,
+        totalRecord,
+        data: lists
+      };
 
     } catch (error) {
       throw error;

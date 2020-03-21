@@ -6,12 +6,18 @@ module.exports = ({ config, db }) => {
 
   return (req, res, next) => {
 
+    const schema = Joi.object().keys({
+      limit: Joi.number().integer().default(5),
+      page: Joi.number().integer(),
+      orderBy: Joi.string().valid('ASC', 'DESC'),
+    });
+
     let Roles = new services.RoleServices({ config, db });
     
-    Joi.validate()
-      .then( () => {
+    Joi.validate(req.query, schema)
+      .then( params => {
 
-        Roles.lists()
+        Roles.lists(params)
           .then(response.json(res, 200))
           .catch(next);
           

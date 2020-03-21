@@ -19,7 +19,7 @@ module.exports = {
         values: ['waiting', 'accepted', 'rejected']
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
